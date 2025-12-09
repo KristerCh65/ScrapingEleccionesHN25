@@ -201,6 +201,22 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.env/
+
+# Resultados y PDFs
+actas_pdf/
+resultados_presidente.json
+resultados_presidente.csv
+
+# VSCode / Codespaces
+.vscode/
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
