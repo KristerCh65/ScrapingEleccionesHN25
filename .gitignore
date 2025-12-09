@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+
+venv/
+.env/
+
+actas_pdf/
+resultados_presidente.json
+resultados_presidente.csv
+
+.vscode/

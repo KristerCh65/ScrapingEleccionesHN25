@@ -1,0 +1,37 @@
+name: Update CSV
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install system deps
+        run: |
+          sudo apt update
+          sudo apt install -y tesseract-ocr poppler-utils
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Run scraper
+        run: python cne_scraper.py
+
+      - name: Commit updated results
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add resultados_presidente.csv resultados_presidente.json || true
+          git commit -m "Actualizar resultados presidenciales" || echo "No hay cambios"
+          git push
